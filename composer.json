@@ -1,0 +1,12 @@
+{
+    "name": "esmaily/laravel-file-manager",
+    "description": "Manage All File And Directory Power by Laravel",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "jaffar",
+            "email": "jaffar9898@gmail.com"
+        }
+    ],
+    "require": {}
+}
