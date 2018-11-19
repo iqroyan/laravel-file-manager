@@ -1,7 +1,25 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Seyed-Lock
- * Date: 11/19/2018
- * Time: 11:51 PM
- */
+namespace Esmaily\FileManager;
+
+class FileManagerServiceProvider extends ServiceProvider
+{
+    /**
+     * Bootstrap services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        //
+    }
+
+    /**
+     * Register services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        //
+    }
+}

@@ -8,5 +8,10 @@
             "email": "jaffar9898@gmail.com"
         }
     ],
+    "autoload":{
+      "psr-4":{
+
+      }
+    },
     "require": {}
 }
