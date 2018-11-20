@@ -1,6 +1,7 @@
 {
-    "name": "esmaily/laravel-file-manager",
+    "name": "esmaily/file-manager",
     "description": "Manage All File And Directory Power by Laravel",
+    "type":"Package",
     "license": "MIT",
     "authors": [
         {
@@ -9,8 +10,11 @@
         }
     ],
     "autoload":{
-      "psr-4":{
+        "classmap":[
 
+        ],
+      "psr-4":{
+         "Esmaily\\FileManager":"src/"
       }
     },
     "require": {}
