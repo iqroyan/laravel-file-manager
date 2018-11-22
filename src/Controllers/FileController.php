@@ -14,7 +14,7 @@ class FileController extends Controller
     {
         $path = ' ';
 
-        $route = $this->root;
+        $route = config('filemanager.root');
         if ($request->has('directory')) {
             $path  = $request->input('directory');
             $route = $this->root . $request->input('directory');
@@ -22,7 +22,7 @@ class FileController extends Controller
         $directories = base(Storage::directories($route), $route);
         $files       = base(Storage::files($route), $route);
 
-        return view('file.index', ['directories' => $directories, 'files' => $files, 'path' => $path]);
+        return view('fileManager::file.index', ['directories' => $directories, 'files' => $files, 'path' => $path]);
     }
 
     public function store (Request $request)

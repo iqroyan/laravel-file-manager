@@ -15,7 +15,10 @@
         ],
       "psr-4":{
          "Esmaily\\FileManager":"src/"
-      }
+      },
+        "files":[
+          "src/Http/helpers.php"
+        ]
     },
     "require": {}
 }

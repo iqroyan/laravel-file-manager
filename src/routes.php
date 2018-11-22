@@ -1,24 +1,20 @@
 <?php
 
 Route::name('fileManager.')->prefix('file-manager/')->group(function () {
-    Route::post('rename', ['as' => 'rename', 'uses' => 'FileController@rename']);
-    Route::post('move', ['as' => 'move', 'uses' => 'FileController@move']);
+    Route::get('', 'Esmaily\FileManager\Controllers\FileController@index')->name('index');
+    Route::post('rename', 'Esmaily\FileManager\Controllers\FileController@rename')->name('rename');
+    Route::post('move', 'Esmaily\FileManager\Controllers\FileController@move')->name('move');
 # Files routes
-    Route::group(['prefix' => 'file'], function () {
-        Route::get('upload', 'file.upload');
-        Route::get('/', ['as' => 'file.index', 'uses' => 'FileController@index']);
-        Route::get('/edit/{name}/{path?}', ['as' => 'file.edit', 'uses' => 'FileController@edit']);
-        Route::get('/show/{name}/{path?}', ['as' => 'file.show', 'uses' => 'FileController@show']);
-        Route::post('/', ['as' => 'file.store', 'uses' => 'FileController@store']);
-        Route::put('/update', ['as' => 'file.update', 'uses' => 'FileController@update']);
-        Route::post('upload', ['as' => 'upload', 'uses' => 'FileController@upload']);
-        Route::post('destroy', ['as' => 'file.destroy', 'uses' => 'FileController@destroy']);
-        Route::post('addWaterMark', ['as' => 'file.addWaterMark', 'uses' => 'FileController@addWaterMark']);
-        Route::post('download', ['as' => 'file.download', 'uses' => 'FileController@download']);
-    });
+    Route::get('upload', 'Esmaily\FileManager\Controllers\FileController@upload')->name('upload');
+    Route::get('edit/{name}/{path?}', 'Esmaily\FileManager\Controllers\FileController@edit')->name('edit');
+    Route::get('show/{name}/{path?}', 'Esmaily\FileManager\Controllers\FileController@show')->name('show');
+    Route::post('file/store', 'Esmaily\FileManager\Controllers\FileController@store')->name('file.store');
+    Route::put('update', 'Esmaily\FileManager\Controllers\FileController@update')->name('update');
+    Route::post('upload', 'Esmaily\FileManager\Controllers\FileController@upload')->name('upload');
+    Route::post('file/destroy', 'Esmaily\FileManager\Controllers\FileController@destroy')->name('file.destroy');
+    Route::post('addWaterMark', 'Esmaily\FileManager\Controllers\FileController@addWaterMark')->name('addWaterMark');
+    Route::post('download', 'Esmaily\FileManager\Controllers\FileController@download')->name('download');
 #Directory Routes
-    Route::group(['prefix' => 'directory'], function () {
-        Route::post('/', ['as' => 'directory.store', 'uses' => 'DirectoryController@store']);
-        Route::post('destroy', ['as' => 'directory.destroy', 'uses' => 'DirectoryController@destroy']);
-    });
+    Route::post('directory/store', 'DirectoryController@store')->name('directory.store');
+    Route::post('directory/destroy', 'DirectoryController@destroy')->name('directory.destroy');
 });
