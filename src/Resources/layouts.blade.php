@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "XHTML 1.0 Transitional" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -18,7 +18,7 @@
 <!-- WRAPPER -->
 <div id="wrapper">
 
-    @include('partials.popup')
+    @includeIf('fileManager::partials.popup')
     <!-- HEADER -->
     <div id="header" style="height: 180px;">
 

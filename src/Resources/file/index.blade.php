@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('fileManager::layouts')
 @section('content')
     <!-- title -->
     <div id = "page-title">
@@ -7,7 +7,7 @@
         </div>
     </div>
     <!-- ENDS title -->
-    <form name = "BrowseForm" id = "BrowseForm" action = "{{ route('file.index') }}" method = "get">
+    <form name = "BrowseForm" id = "BrowseForm" action = "{{ route('fileManager.index') }}" method = "get">
         @csrf
         <table id = "toptable">
             <tbody>
@@ -28,7 +28,7 @@
                     </button>
                     <br>
                     <span style = "font-size: 80%;"> <a
-                                href = "{{ route('file.index') }}">شاخه اصلی</a> /public_html</span>
+                                href = "{{ route('fileManager.index') }}">شاخه اصلی</a> /public_html</span>
                 </td>
             </tr>
             </tbody>
@@ -93,8 +93,8 @@
                     </div>
                     <div class = "items-meta">
                         <a href = "javascript:__app.DeleteFile('{{ $file }}')">حذف</a> -
-                        <a href = "{{ $ext=='txt' ? route('file.edit',[$file,rep($path)]) : '#' }}">ویرایش</a> -
-                        <a href = "{{ in_array($ext,$isView) ? route('file.show',[$file,rep($path)]) : '#' }}">نمایش</a> -
+                        <a href = "{{ $ext=='txt' ? route('fileManager.edit',[$file,rep($path)]) : '#' }}">ویرایش</a> -
+                        <a href = "{{ in_array($ext,$isView) ? route('fileManager.show',[$file,rep($path)]) : '#' }}">نمایش</a> -
                         <a href = "javascript:__app.Move('{{ $file }}')">انتقال</a> -
                         <a href = "javascript:__app.Rename('{{ $file }}')">تغییر نام</a>
                     </div>
