@@ -1,3 +1,85 @@
+@font-face {
+    font-family: 'iran-sans';
+    font-weight: normal;
+    src: url('../fonts/iransans.ttf') format('truetype');
+}
+
 body{
-    background: #c33;
+    background: #EEEEEE;
+    font-family: iran-sans;
+}
+.header .navbar{
+    background: #34495e;
+}
+.header .navbar .navbar-brand{
+    color: #ecf0f1;
+    font-weight: bolder;
+}
+.header .action-bar{
+    background: #bdc3c7;
+}
+.header .action-bar .list-inline{
+    flex-direction: row-reverse;
+
+}
+.header .action-bar .list-inline .list-inline-item{
+    padding: 0 4px;
+}
+.header .action-bar .list-inline .list-inline-item:last-child{
+    margin-right: 0.5rem;
+}
+.header .action-bar .list-inline .list-inline-item a{
+    color: #34495e;
+    transition: color 600ms;
+}
+.header .action-bar .list-inline .list-inline-item a:hover{
+    color: #34495e;
+    text-decoration: none;
+
+}
+.main{
+    flex-direction: row-reverse;
+    min-height:30rem;
+}
+.main .sidebar{
+    /*background: #000;*/
+}
+.main .sidebar .input-group-text{
+    padding: 0;
+}
+.link-item,.btn-file{
+    color: #34495e;
+}
+.file-items{
+    direction: rtl;
+    width: 100%;
+}
+.btn-file{
+
+}
+.icon-def{
+    color:#34495e;
+}
+.icon-folder{
+    color:#f1c40f;
+}
+.icon-file{
+    color: #9b59b6;
+}
+.meta-items .list-inline-item{
+    margin: 0;
+}
+.meta-items .sep{
+    font-weight: bolder;
+    margin: 0 1px;
+}
+ /*###########################################################
+                                                             footer styles
+ ###########################################################*/
+.footer{
+    background: #34495e;
+}
+.footer .topic{
+    font-size: 18px;
+    color: #bdc3c7;
 }
