@@ -40,6 +40,7 @@ body{
 .main{
     flex-direction: row-reverse;
     min-height:30rem;
+    background: #fff;
 }
 .main .sidebar{
     /*background: #000;*/

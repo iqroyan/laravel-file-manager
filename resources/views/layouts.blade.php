@@ -67,16 +67,16 @@
     <!-- MAIN -->
     <main id="main" class="main row ">
         <aside class="sidebar col-md-4 p-2">
-            <form action="" class="form-inline embed-responsive">
+            <form action="{{ route('fileManager.index') }}" class="form-inline embed-responsive" id="BrowseForm" method="get">
                 <div class="input-group mb-2 mr-sm-2 flex-row-reverse">
                     <div class="input-group-prepend">
                         <div class="input-group-text p-0">
-                            <button type="submit" class="btn btn-file bg-transparent">
+                            <button type="submit" class="btn btn-file bg-transparent" onclick="__app.browse('root')">
                                 <i class="fa fa-home"></i>
                             </button>
                         </div>
                     </div>
-                    <input type="text" name="root_path" class="form-control" id="inlineFormInputGroupUsername2"
+                    <input  type="text" name="directory" class="form-control" value="{{ $path }}" id="directoryBrowse"
                            placeholder="root">
                     <div class="input-group-prepend float-right">
                         <div class="input-group-text p-0">
@@ -90,130 +90,8 @@
         </aside>
         <section class="content col-md-8 p-2">
             <!-- content -->
-            <table class="table  table-hover  file-items">
-                <thead class="thead-light">
-                <tr>
-                    <th scope="col">نام</th>
-                    <th scope="col">سایز</th>
-                    <th scope="col">آخرین ویرایش</th>
-                    <th scope="col">نوع</th>
-                    <th scope="col">عملیات</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <th scope="row">
-                        <i class="fa fa-folder icon-folder"></i>
-                        <span class="title">assets</span>
-                    </th>
-                    <td>20 kb</td>
-                    <td>2018/02/14</td>
-                    <td>file</td>
-                    <td>
-                        <ul class="list-inline m-0 p-0 meta-items">
-                            <li class="list-inline-item"><a href="" class="icon-def">
-                                    <i class="fa fa-eye"></i>
-                                </a>
-                            </li>
-                            <span class="sep">-</span>
-                            <li class="list-inline-item"><a href="" class="icon-def">
-                                    <i class="fa fa-edit"></i>
-                                </a>
-                            </li>
-                            <span class="sep">-</span>
-                            <li class="list-inline-item"><a href="" class="icon-def">
-                                    <i class="fa fa-trash"></i>
-                                </a>
-                            </li>
-                            <span class="sep">-</span>
-                            <li class="list-inline-item"><a href="" class="icon-def">
-                                    <i class="fa fa-arrows-alt"></i>
-                                </a>
-                            </li>
-                            <span class="sep">-</span>
-                            <li class="list-inline-item"><a href="" class="icon-def">
-                                    <i class="fa fa-edi"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">
-                        <i class="fa fa-file icon-file"></i>
-                        <span class="title">file.png</span>
-                    </th>
-                    <td>20 kb</td>
-                    <td>2018/02/14</td>
-                    <td>file</td>
-                    <td>
-                        <ul class="list-inline m-0 p-0 meta-items">
-                            <li class="list-inline-item"><a href="" class="icon-def">
-                                    <i class="fa fa-eye"></i>
-                                </a>
-                            </li>
-                            <span class="sep">-</span>
-                            <li class="list-inline-item"><a href="" class="icon-def">
-                                    <i class="fa fa-edit"></i>
-                                </a>
-                            </li>
-                            <span class="sep">-</span>
-                            <li class="list-inline-item"><a href="" class="icon-def">
-                                    <i class="fa fa-trash"></i>
-                                </a>
-                            </li>
-                            <span class="sep">-</span>
-                            <li class="list-inline-item"><a href="" class="icon-def">
-                                    <i class="fa fa-arrows-alt"></i>
-                                </a>
-                            </li>
-                            <span class="sep">-</span>
-                            <li class="list-inline-item"><a href="" class="icon-def">
-                                    <i class="fa fa-edi"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">alert.png</th>
-                    <td>20 kb</td>
-                    <td>2018/02/14</td>
-                    <td>file</td>
-                    <td class="opration-item">
-                        <ul class="list-inline m-0 p-0 meta-items">
-                            <li class="list-inline-item"><a href="" class="icon-def">
-                                    <i class="fa fa-eye"></i>
-                                </a>
-                            </li>
-                            <span class="sep">-</span>
-                            <li class="list-inline-item"><a href="" class="icon-def">
-                                    <i class="fa fa-edit"></i>
-                                </a>
-                            </li>
-                            <span class="sep">-</span>
-                            <li class="list-inline-item"><a href="" class="icon-def">
-                                    <i class="fa fa-trash"></i>
-                                </a>
-                            </li>
-                            <span class="sep">-</span>
-                            <li class="list-inline-item"><a href="" class="icon-def">
-                                    <i class="fa fa-arrows-alt"></i>
-                                </a>
-                            </li>
-                            <span class="sep">-</span>
-                            <li class="list-inline-item"><a href="" class="icon-def">
-                                    <i class="fa fa-edi"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
 
-
-        {{--@yield('content')--}}
+                @yield('content')
         <!-- ENDS content -->
         </section>
     </main>
@@ -233,7 +111,8 @@
 
 <script type="text/javascript" src="{{ asset('filemanager/lib/jquery/jquery.js') }}"></script>
 <script type="text/javascript" src="{{ asset('filemanager/lib/sweetalert/sweetalert2.all.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('filemanager/lib/bootstrap/bootstrap.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('filemanager/lib/fontawesome/all.js') }}"></script>
-<script type="text/javascript" src="{{ asset('filemanager/js/website.jd') }}"></script>
+<script type="text/javascript" src="{{ asset('filemanager/js/website.js') }}"></script>
 </body>
 </html>
