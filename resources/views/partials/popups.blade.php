@@ -1,99 +1,59 @@
 @php
     $path = isset($path) ? $path :NULL;
 @endphp
-
-<div class = "popups hidden">
-
+<div class = "popups">
     <!-- Make Folder -->
-    <div class = "popup-box" id = "makeDir">
-        <div class = "head">
-            <p class = "box-title"> ایجاد پوشه جدید</p>
-        </div>
-        <div class = "content">
-            <form action = "{{ route('directory.store') }}" name = "popups-form" method = "post">
-                @csrf
-                <input type = "hidden" name = "path" value = "{{$path}}">
-                <div class = "form-group title-row">
-                    <p class = "box-title">لطفا نام پوشه خود را وارد کنید? </p>
+    <div class="modal fade" id="newDirectory" tabindex="-1" role="dialog" aria-labelledby="newDirectoryLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header flex-row-reverse ">
+                    <h5 class="modal-title" id="newDirectoryLabel">پوشه جدید</h5>
+                    <button type="button" class="close float-left m-0 p-2"  data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-                <div class = "form-group">
-                    <input required type = "text" name = "name" class = "form-control" autofocus placeholder = "name">
+                <div class="modal-body">
+                    <form action = "{{ route('fileManager.directory.store') }}" id="newDirectoryForm"  name = "popups-form" method = "post">
+                        @csrf
+                        <input type = "hidden" name = "path" value = "{{$path}}">
+                        <div class="form-group ">
+                            <label for="directoryName" class="col-form-label float-right">نام پوشه:</label>
+                            <input type="text" name="name" required class="form-control" id="directoryName">
+                        </div>
+                    </form>
                 </div>
-                <div class = "form-group btn-row">
-                    <input type = "submit" value = "ایجاد" class = "btn btn-success">
-                    <input type = "button" value = "لغو" class = "btn btn-danger" onclick = "__app.close()">
+                <div class="modal-footer justify-content-start">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">لغو</button>
+                    <button type="submit" class="btn btn-primary" onclick="__app.submit('newDirectoryForm')">ایجاد</button>
                 </div>
-            </form>
-        </div>
-    </div>
-    <!-- Make file -->
-    <div class = "popup-box" id = "makeFile">
-        <div class = "head">
-            <p class = "box-title"> ایجاد فایل جدید</p>
-        </div>
-        <div class = "content">
-            <form action = "{{ route('file.store') }}" name = "popups-form" method = "post">
-                @csrf
-                <input type = "hidden" name = "path" value = "{{$path}}">
-                <div class = "form-group title-row">
-                    <p class = "box-title">لطفا نام فایل خود را وارد کنید? </p>
-                </div>
-                <div class = "form-group">
-                    <input required type = "text" name = "name" class = "form-control" autofocus placeholder = "name">
-                </div>
-                <div class = "form-group btn-row">
-                    <input type = "submit" value = "ایجاد" class = "btn btn-success">
-                    <input type = "button" value = "لغو" class = "btn btn-danger" onclick = "__app.close()">
-                </div>
-            </form>
+            </div>
         </div>
     </div>
-    <!-- Rename file -->
-    <div class = "popup-box" id = "rename">
-        <div class = "head">
-            <p class = "box-title">ویرایش نام</p>
-        </div>
-        <div class = "content">
-            <form action = "{{ route('rename') }}" name = "popups-form" method = "post">
-                @csrf
-                <input type = "hidden" name = "path" value = "{{$path}}">
-                <input type = "hidden" name = "old_name" value = "" id="old_name">
-                <div class = "form-group title-row">
-                    <p class = "box-title">نام فعلی فایل:</p>
-                    <p class="old"></p>
+    <!-- Make New file-->
+    <div class="modal fade" id="newFile" tabindex="-1" role="dialog" aria-labelledby="newFileLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header flex-row-reverse ">
+                    <h5 class="modal-title" id="newFileLabel">پوشه جدید</h5>
+                    <button type="button" class="close float-left m-0 p-2"  data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-                <div class = "form-group">
-                    <input required type = "text" id="renameinput" name = "name" class = "form-control" autofocus placeholder = "name">
+                <div class="modal-body">
+                    <form action = "{{ route('fileManager.file.store') }}" id="newFileForm"  name = "popups-form" method = "post">
+                        @csrf
+                        <input type = "hidden" name = "path" value = "{{$path}}">
+                        <div class="form-group ">
+                            <label for="directoryName" class="col-form-label float-right">نام پوشه:</label>
+                            <input type="text" name="name" required class="form-control" id="directoryName">
+                        </div>
+                    </form>
                 </div>
-                <div class = "form-group btn-row">
-                    <input type = "submit" value = "تغییر" class = "btn btn-success">
-                    <input type = "button" value = "لغو" class = "btn btn-danger" onclick = "__app.close()">
+                <div class="modal-footer justify-content-start">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">لغو</button>
+                    <button type="submit" class="btn btn-primary" onclick="__app.submit('newFileForm')">ایجاد</button>
                 </div>
-            </form>
-        </div>
-    </div>
-    <!-- Move file -->
-    <div class = "popup-box" id = "move">
-        <div class = "head">
-            <p class = "box-title">انتقال</p>
-        </div>
-        <div class = "content">
-            <form action = "{{ route('move') }}" name = "popups-form" method = "post">
-                @csrf
-                <input type = "hidden" name = "path" value = "{{$path}}">
-                <input type = "hidden" name = "old_path" value = "" id="old_path">
-                <div class = "form-group title-row">
-                    <p class = "box-title">مسیر فعلی :</p>
-                    <p class="old"></p>
-                </div>
-                <div class = "form-group">
-                    <input required type = "text" name = "name" class = "form-control" autofocus placeholder = "name">
-                </div>
-                <div class = "form-group btn-row">
-                    <input type = "submit" value = "انتقال" class = "btn btn-success">
-                    <input type = "button" value = "لغو" class = "btn btn-danger" onclick = "__app.close()">
-                </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>

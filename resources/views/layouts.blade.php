@@ -10,9 +10,9 @@
     <link rel="stylesheet" href="{{ asset('/filemanager/css/website.css') }}">
     <title>سیستم مدیریت فایل</title>
 </head>
-<body onload="">
+<body >
 <!-- WRAPPER -->
-<section id="wrapper" class="container-fluid">
+<section id="container" class="container-fluid">
 
 @includeIf('fileManager::partials.popup')
 <!-- HEADER -->
@@ -25,13 +25,13 @@
         <div class="action-bar row justify-content-end py-2 px-4">
             <ul class=" list-inline m-0 d-flex ">
                 <li class="list-inline-item">
-                    <a href="#">
+                    <a href="javascript:0" data-toggle="modal" data-target="#newFile">
                         <span class="title">فایل</span>
                         <i class="fa fa-plus"></i>
                     </a>
                 </li>
                 <li class="list-inline-item">
-                    <a href="#">
+                    <a href="javascript:0"  data-toggle="modal" data-target="#newDirectory">
                         <span class="title">پوشه</span>
                         <i class="fa fa-folder-plus"></i>
                     </a>
@@ -109,6 +109,9 @@
 </section>
 <!-- ENDS WRAPPER -->
 
+<!-- Include popups -->
+@include('fileManager::partials.popups')
+<!-- end popups-->
 <script type="text/javascript" src="{{ asset('filemanager/lib/jquery/jquery.js') }}"></script>
 <script type="text/javascript" src="{{ asset('filemanager/lib/sweetalert/sweetalert2.all.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('filemanager/lib/bootstrap/bootstrap.min.js') }}"></script>

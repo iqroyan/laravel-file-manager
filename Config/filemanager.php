@@ -1,6 +1,6 @@
 <?php
 return [
     # File manager root path
-    'root' => storage_path('file-manager'),
+    'root' =>'public/file-manager',
     'lang' => 'fa'
 ];

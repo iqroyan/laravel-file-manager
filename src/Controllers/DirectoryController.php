@@ -2,6 +2,7 @@
 
 namespace  Esmaily\FileManager\Controllers;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -12,7 +13,7 @@ class DirectoryController extends Controller
     public function store(Request $request)
     {
         $path = $request->input('path');
-        $path = $path==NULL ? $this->root . $request->name : $this->root . $path .'/'.$request->name;
+        $path = $path==NULL ? root(). $request->name : $this->root . $path .'/'.$request->name;
         Storage::makeDirectory($path);
         return back();
     }

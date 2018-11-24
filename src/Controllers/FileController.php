@@ -10,34 +10,34 @@ use Illuminate\Support\Facades\Storage;
 class FileController extends Controller
 {
     //
-    public function index (Request $request)
+    public function index(Request $request)
     {
         $path = ' ';
-
         $route = config('filemanager.root');
         if ($request->has('directory')) {
-            $path  = $request->input('directory');
-            $route = $this->root . $request->input('directory');
+            $path = $request->input('directory');
+            $route = config('filemanager.root') . '/' . $request->input('directory');
+//            return $route;
         }
         $directories = base(Storage::directories($route), $route);
-        $files       = base(Storage::files($route), $route);
+//        return $directories;
+        $files = base(Storage::files($route), $route);
 
         return view('fileManager::file.index', ['directories' => $directories, 'files' => $files, 'path' => $path]);
     }
 
-    public function store (Request $request)
+    public function store(Request $request)
     {
         $path = $request->input('path');
-        $path = $path == NULL ? $this->root . $request->name : $this->root . $path . '/' . $request->name;
+        $path = $path == NULL ? root() . $request->name : root() . $path . '/' . $request->name;
         Storage::put($path, '');
-
         return back();
     }
 
-    public function rename (Request $request)
+    public function rename(Request $request)
     {
-        $path    = $request->path;
-        $path    = $path == NULL ? $this->root : $this->root . $path . '/';
+        $path = $request->path;
+        $path = $path == NULL ? $this->root : $this->root . $path . '/';
         $oldName = $path . $request->input('oldname');
         $newName = $path . $request->input('newname');
         //
@@ -46,35 +46,35 @@ class FileController extends Controller
         return back();
     }
 
-    public function move (Request $request)
+    public function move(Request $request)
     {
-        $path     = $request->path;
-        $path     = $path == NULL ? $this->root : $this->root . $path . '/';
-        $oldPath  = $path . $request->input('oldpath');
+        $path = $request->path;
+        $path = $path == NULL ? $this->root : $this->root . $path . '/';
+        $oldPath = $path . $request->input('oldpath');
         $filename = last(explode('/', $oldPath));
-        $newPath  = $this->root . $request->input('newpath') . '/' . $filename;
+        $newPath = $this->root . $request->input('newpath') . '/' . $filename;
 
         Storage::move($oldPath, $newPath);
 
         return back();
     }
 
-    public function show ($name, $path = '')
+    public function show($name, $path = '')
     {
         $file = rep($this->root, 'public', '/storage') . trim(rep($path, '\\', '/'), ' ') . '/' . $name;
 
         return view('file.show', ['file' => $file]);
     }
 
-    public function edit ($name, $path = '')
+    public function edit($name, $path = '')
     {
-        $file    = $this->root . trim(rep($path, '\\', '/'), ' ') . '/' . $name;
+        $file = $this->root . trim(rep($path, '\\', '/'), ' ') . '/' . $name;
         $content = Storage::get($file);
 
         return view('file.edit', ['content' => $content, 'file' => $file]);
     }
 
-    public function update (Request $request)
+    public function update(Request $request)
     {
         $file = $request->file;
         Storage::put($file, $request->input('description'));
@@ -82,7 +82,7 @@ class FileController extends Controller
         return back();
     }
 
-    public function upload (Request $request)
+    public function upload(Request $request)
     {
         $request->validate([
             'file' => 'required|image|mimes:png,gif,jpg,jpeg|max:2048',
@@ -99,7 +99,7 @@ class FileController extends Controller
         return back();
     }
 
-    public function addWatermark (Request $request)
+    public function addWatermark(Request $request)
     {
 
         $file = $request->input('file');
@@ -111,9 +111,9 @@ class FileController extends Controller
         return back();
     }
 
-    public function download (Request $request)
+    public function download(Request $request)
     {
-        $path  = $this->root . $request->input('path');
+        $path = $this->root . $request->input('path');
         $files = explode(',', $request->input('files'));
 
         if (count($files) == 1) {
@@ -122,7 +122,7 @@ class FileController extends Controller
             return Storage::download($file);
         } else {
             $name = "storage/downloads/" . time() . '-' . count($files) . "-file.zip";
-            $zip  = new \ZipArchive();
+            $zip = new \ZipArchive();
             $zip->open($name, \ZipArchive::CREATE);
             if ($zip->open($name, \ZipArchive::CREATE) !== TRUE) {
                 return 'zip create error';
@@ -139,7 +139,7 @@ class FileController extends Controller
 
     }
 
-    public function destroy (Request $request)
+    public function destroy(Request $request)
     {
         $path = $request->input('path');
         $file = $request->input('file');

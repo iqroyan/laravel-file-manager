@@ -14,6 +14,7 @@ class FileManagerServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        define('DS',DIRECTORY_SEPARATOR);
         $this->loadRoutesFrom(__DIR__ . '/routes.php');
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'fileManager');
         $this->registerHelpers();

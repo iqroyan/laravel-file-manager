@@ -15,6 +15,6 @@ Route::name('fileManager.')->prefix('file-manager/')->group(function () {
     Route::post('addWaterMark', 'Esmaily\FileManager\Controllers\FileController@addWaterMark')->name('addWaterMark');
     Route::post('download', 'Esmaily\FileManager\Controllers\FileController@download')->name('download');
 #Directory Routes
-    Route::post('directory/store', 'DirectoryController@store')->name('directory.store');
-    Route::post('directory/destroy', 'DirectoryController@destroy')->name('directory.destroy');
+    Route::post('directory/store', 'Esmaily\FileManager\Controllers\DirectoryController@store')->name('directory.store');
+    Route::post('directory/destroy', 'Esmaily\FileManager\Controllers\DirectoryController@destroy')->name('directory.destroy');
 });
