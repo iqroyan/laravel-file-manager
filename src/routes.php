@@ -11,10 +11,10 @@ Route::name('fileManager.')->prefix('file-manager/')->group(function () {
     Route::post('file/store', 'Esmaily\FileManager\Controllers\FileController@store')->name('file.store');
     Route::put('update', 'Esmaily\FileManager\Controllers\FileController@update')->name('update');
     Route::post('upload', 'Esmaily\FileManager\Controllers\FileController@upload')->name('upload');
-    Route::post('file/destroy', 'Esmaily\FileManager\Controllers\FileController@destroy')->name('file.destroy');
+    Route::delete('file/destroy/{file}', 'Esmaily\FileManager\Controllers\FileController@destroy')->name('file.destroy');
     Route::post('addWaterMark', 'Esmaily\FileManager\Controllers\FileController@addWaterMark')->name('addWaterMark');
     Route::post('download', 'Esmaily\FileManager\Controllers\FileController@download')->name('download');
 #Directory Routes
     Route::post('directory/store', 'Esmaily\FileManager\Controllers\DirectoryController@store')->name('directory.store');
-    Route::post('directory/destroy', 'Esmaily\FileManager\Controllers\DirectoryController@destroy')->name('directory.destroy');
+    Route::delete('directory/destroy/{directory}', 'Esmaily\FileManager\Controllers\DirectoryController@destroy')->name('directory.destroy');
 });

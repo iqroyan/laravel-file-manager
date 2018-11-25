@@ -35,6 +35,25 @@ class App{
     })
 
     }
+    dangerMode(el){
+        swal({
+            title: 'مطمئن هستید',
+            text: 'آیا عملیات انجام شود ؟ ',
+            //         type: 'error',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'بله، مطمئنم !',
+            cancelButtonText: 'لغو',
+            backdrop: 'rgba(165, 43, 106, 0.45)'
+        }).then((result) => {
+            if (result.value) {
+                let form =$(el).parent()[0];
+                $(form).submit();
+            }
+        });
+    }
     submit(form){
         $('#'+form).submit();
     }

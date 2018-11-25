@@ -16,24 +16,31 @@
                 </thead>
                 <tbody>
                 @foreach($directories as $directory)
-                <tr ondblclick="__app.browse('{{$directory}}')">
-                    <th scope="row">
+                <tr  ondblclick="__app.browse('{{$directory}}')">
+                    <td>
                         <i class="fa fa-folder icon-folder"></i>
                         <span class="title">{{ $directory }}</span>
-                    </th>
+                    </td>
                     <td>{{ fileInfo($directory,$path,'size') }}</td>
                     <td>{{ fileInfo($directory,$path,'date') }}</td>
                     <td>directory</td>
-                    <td>
-                        <ul class="list-inline m-0 p-0 meta-items">
-                            <li class="list-inline-item"><a href="" class="icon-def" title="حذف" data-toggle="tooltip">
-                                    <i class="fa fa-trash"></i>
-                                </a>
+                    <td class="p-0 pt-2">
+                        <ul class="list-inline m-0 p-0  meta-items">
+                            <li class="list-inline-item">
+                                <form method="post" action="{{ route('fileManager.directory.destroy',$directory) }}" class="form-inline m-0 delete-form">
+                                    @csrf
+                                    @method('DELETE')
+                                    <input type="hidden" name="path" value="{{ $path }}">
+                                    <button type="button" onclick="__app.dangerMode(this)" class="bg-transparent border-0 p-0" >
+                                        <i class="fa fa-trash icon-def"></i>
+                                    </button>
+                                </form>
                             </li>
                             <span class="sep">-</span>
-                            <li class="list-inline-item"><a href="" class="icon-def">
-                                    <i class="fa fa-arrows-alt"></i>
-                                </a>
+                            <li class="list-inline-item">
+                                <button type="button"  data-toggle="modal" data-target="#rename" class="bg-transparent border-0 p-0" >
+                                    <i class="fa fa-arrows-alt icon-def"></i>
+                                </button>
                             </li>
                             <span class="sep">-</span>
                             <li class="list-inline-item"><a href="" class="icon-def">
@@ -59,6 +66,16 @@
                         <td>text</td>
                         <td>
                             <ul class="list-inline m-0 p-0 meta-items">
+                                <li class="list-inline-item">
+                                    <form method="post" action="{{ route('fileManager.file.destroy',$file) }}" class="form-inline m-0 delete-form">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="button" onclick="__app.dangerMode(this)" class="bg-transparent border-0 p-0" >
+                                            <i class="fa fa-trash icon-def"></i>
+                                        </button>
+                                    </form>
+                                </li>
+                                <span class="sep">-</span>
                                 <li class="list-inline-item"><a href="{{ route('fileManager.show',[$file,rep($path)]) }}" class="icon-def">
                                         <i class="fa fa-eye"></i>
                                     </a>
@@ -68,11 +85,8 @@
                                         <i class="fa fa-edit"></i>
                                     </a>
                                 </li>
-                                <span class="sep">-</span>
-                                <li class="list-inline-item"><a href="" class="icon-def">
-                                        <i class="fa fa-trash"></i>
-                                    </a>
-                                </li>
+
+
                                 <span class="sep">-</span>
                                 <li class="list-inline-item"><a href="" class="icon-def">
                                         <i class="fa fa-arrows-alt"></i>

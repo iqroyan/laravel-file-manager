@@ -37,9 +37,9 @@ class FileController extends Controller
     public function rename(Request $request)
     {
         $path = $request->path;
-        $path = $path == NULL ? $this->root : $this->root . $path . '/';
-        $oldName = $path . $request->input('oldname');
-        $newName = $path . $request->input('newname');
+        $path = $path == NULL ? root() : root() . $path . '/';
+        $oldName = $path . $request->input('old_name');
+        $newName = $path . $request->input('new_name');
         //
         Storage::move($oldName, $newName);
 
@@ -139,11 +139,10 @@ class FileController extends Controller
 
     }
 
-    public function destroy(Request $request)
+    public function destroy(Request $request,$file)
     {
         $path = $request->input('path');
-        $file = $request->input('file');
-        $path = $path == NULL ? $this->root . $file : $this->root . "{$path}/{$file}";
+        $path = $path == NULL ? root() . $file : root() . "{$path}/{$file}";
         Storage::delete($path);
 
         return back();
