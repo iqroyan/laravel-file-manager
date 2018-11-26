@@ -1,16 +1,15 @@
-
-class App{
-    constructor(){
-        let name='app';
+class App {
+    constructor() {
+        let name = 'app';
         console.log('app');
     }
+
     // browse directories
-    browse(name){
+    browse(name) {
         var dir = $('#directoryBrowse').val();
         if (dir.length == 0) {
             $('#directoryBrowse').val(name);
-        }else if(name =='root')
-        {
+        } else if (name == 'root') {
             $('#directoryBrowse').val(null);
         }
         else {
@@ -18,24 +17,25 @@ class App{
         }
         $('#BrowseForm').submit();
     }
+
     // create new directory
-    newDirectory()
-    {
-         swal({
-        title: 'نام پوشه رو وارد کنید',
-        input: 'text',
-        showCancelButton: true,
-             showCloseButton:true,
-         cancelButtonText:'لغو',
-        confirmButtonText:'ایجاد',
-         html:'ssdf'+'ddddddddddd',
-        inputValidator: (value) => {
-            return !value && 'You need to write something!'
-        }
-    })
+    newDirectory() {
+        swal({
+            title: 'نام پوشه رو وارد کنید',
+            input: 'text',
+            showCancelButton: true,
+            showCloseButton: true,
+            cancelButtonText: 'لغو',
+            confirmButtonText: 'ایجاد',
+            html: 'ssdf' + 'ddddddddddd',
+            inputValidator: (value) => {
+                return !value && 'You need to write something!'
+            }
+        })
 
     }
-    dangerMode(el){
+
+    dangerMode(el) {
         swal({
             title: 'مطمئن هستید',
             text: 'آیا عملیات انجام شود ؟ ',
@@ -49,14 +49,20 @@ class App{
             backdrop: 'rgba(165, 43, 106, 0.45)'
         }).then((result) => {
             if (result.value) {
-                let form =$(el).parent()[0];
+                let form = $(el).parent()[0];
                 $(form).submit();
             }
         });
     }
-    submit(form){
-        $('#'+form).submit();
+
+    submit(form) {
+        $('#' + form).submit();
+    }
+
+    updateInput(value, input) {
+        $(input).val(value);
     }
 }
+
 let __app = new App();
 console.log(__app);

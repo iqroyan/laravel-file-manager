@@ -38,14 +38,16 @@
                             </li>
                             <span class="sep">-</span>
                             <li class="list-inline-item">
-                                <button type="button"  data-toggle="modal" data-target="#rename" class="bg-transparent border-0 p-0" >
+                                <button type="button" onclick="__app.updateInput('{{ $directory }}','#oldPath')"  data-toggle="modal" data-target="#move" class="bg-transparent border-0 p-0" >
                                     <i class="fa fa-arrows-alt icon-def"></i>
                                 </button>
                             </li>
                             <span class="sep">-</span>
-                            <li class="list-inline-item"><a href="" class="icon-def">
-                                    <i class="fa fa-edi"></i>
-                                </a>
+                            <li class="list-inline-item">
+                                    <button type="button" onclick="__app.updateInput('{{ $directory }}','#oldName')"  data-toggle="modal" data-target="#rename" class="bg-transparent border-0 p-0" >
+                                      تغییر نام
+                                    </button>
+
                             </li>
                         </ul>
                     </td>
@@ -88,14 +90,17 @@
 
 
                                 <span class="sep">-</span>
-                                <li class="list-inline-item"><a href="" class="icon-def">
-                                        <i class="fa fa-arrows-alt"></i>
-                                    </a>
+                                <li class="list-inline-item">
+                                    <button type="button" onclick="__app.updateInput('{{ $file }}','#oldPath')"  data-toggle="modal" data-target="#move" class="bg-transparent border-0 p-0" >
+                                        <i class="fa fa-arrows-alt icon-def"></i>
+                                    </button>
                                 </li>
                                 <span class="sep">-</span>
-                                <li class="list-inline-item"><a href="" class="icon-def">
-                                        <i class="fa fa-edi"></i>
-                                    </a>
+                                <li class="list-inline-item">
+                                    <button type="button" onclick="__app.updateInput('{{ $file }}','#oldName')"  data-toggle="modal" data-target="#rename" class="bg-transparent border-0 p-0" >
+                                        تغییر نام
+                                    </button>
+
                                 </li>
                             </ul>
                         </td>

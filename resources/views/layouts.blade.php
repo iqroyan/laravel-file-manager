@@ -109,13 +109,15 @@
 </section>
 <!-- ENDS WRAPPER -->
 
-<!-- Include popups -->
-@include('fileManager::partials.popups')
-<!-- end popups-->
 <script type="text/javascript" src="{{ asset('filemanager/lib/jquery/jquery.js') }}"></script>
 <script type="text/javascript" src="{{ asset('filemanager/lib/sweetalert/sweetalert2.all.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('filemanager/lib/bootstrap/bootstrap.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('filemanager/lib/fontawesome/all.js') }}"></script>
 <script type="text/javascript" src="{{ asset('filemanager/js/website.js') }}"></script>
+
+<!-- Include partial -->
+@include('fileManager::partials.popups')
+@include('fileManager::partials.sweetalert')
+<!-- end partial-->
 </body>
 </html>
