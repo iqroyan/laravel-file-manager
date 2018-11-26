@@ -7,9 +7,17 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
+/**
+ * Class FileController
+ * @package Esmaily\FileManager\Controllers
+ */
 class FileController extends Controller
 {
     //
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index(Request $request)
     {
         $path = ' ';
@@ -17,7 +25,6 @@ class FileController extends Controller
         if ($request->has('directory')) {
             $path = $request->input('directory');
             $route = config('filemanager.root') . '/' . $request->input('directory');
-//            return $route;
         }
         $directories = base(Storage::directories($route), $route);
 //        return $directories;
@@ -26,14 +33,26 @@ class FileController extends Controller
         return view('fileManager::file.index', ['directories' => $directories, 'files' => $files, 'path' => $path]);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(Request $request)
     {
+        $request->validate([
+            'name'=>'required|string',
+        ]);
         $path = $request->input('path');
         $path = $path == NULL ? root() . $request->name : root() . $path . '/' . $request->name;
         Storage::put($path, '');
+        flash();
         return back();
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function rename(Request $request)
     {
         $path = $request->path;
@@ -46,19 +65,28 @@ class FileController extends Controller
         return back();
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function move(Request $request)
     {
         $path = $request->path;
-        $path = $path == NULL ? $this->root : $this->root . $path . '/';
-        $oldPath = $path . $request->input('oldpath');
+        $path = $path == NULL ? root() : root() . $path . '/';
+        $oldPath = $path . $request->input('old_path');
         $filename = last(explode('/', $oldPath));
-        $newPath = $this->root . $request->input('newpath') . '/' . $filename;
+        $newPath = root() . $request->input('new_path') . '/' . $filename;
 
         Storage::move($oldPath, $newPath);
 
         return back();
     }
 
+    /**
+     * @param $name
+     * @param string $path
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function show($name, $path = '')
     {
         $file = rep($this->root, 'public', '/storage') . trim(rep($path, '\\', '/'), ' ') . '/' . $name;
@@ -66,6 +94,11 @@ class FileController extends Controller
         return view('file.show', ['file' => $file]);
     }
 
+    /**
+     * @param $name
+     * @param string $path
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function edit($name, $path = '')
     {
         $file = $this->root . trim(rep($path, '\\', '/'), ' ') . '/' . $name;
@@ -74,6 +107,10 @@ class FileController extends Controller
         return view('file.edit', ['content' => $content, 'file' => $file]);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update(Request $request)
     {
         $file = $request->file;
@@ -82,6 +119,10 @@ class FileController extends Controller
         return back();
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function upload(Request $request)
     {
         $request->validate([
@@ -99,6 +140,10 @@ class FileController extends Controller
         return back();
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function addWatermark(Request $request)
     {
 
@@ -111,6 +156,10 @@ class FileController extends Controller
         return back();
     }
 
+    /**
+     * @param Request $request
+     * @return string
+     */
     public function download(Request $request)
     {
         $path = $this->root . $request->input('path');
@@ -139,12 +188,18 @@ class FileController extends Controller
 
     }
 
-    public function destroy(Request $request,$file)
+    /**
+     * @param Request $request
+     * @param $file
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy(Request $request, $file)
     {
         $path = $request->input('path');
         $path = $path == NULL ? root() . $file : root() . "{$path}/{$file}";
         Storage::delete($path);
-
+        flash()->success('عملیات موفق !','فایل با موفقیت ایجاد شد');
         return back();
     }
+
 }

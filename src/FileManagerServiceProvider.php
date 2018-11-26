@@ -2,6 +2,7 @@
 
 namespace Esmaily\FileManager;
 
+use function foo\func;
 use Illuminate\Support\ServiceProvider;
 
 class FileManagerServiceProvider extends ServiceProvider
@@ -19,6 +20,9 @@ class FileManagerServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'fileManager');
         $this->registerHelpers();
 
+        $this->app->singleton('FlashMessage',function (){
+            return new FlashMessage();
+        });
         $this->publishes([
             __DIR__.'/' => resource_path('views/vendor/filemanager'),
         ],'filemanager-views');

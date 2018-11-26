@@ -123,9 +123,9 @@ function root()
     return config('filemanager.root').'/';
 }
 # show alert flash message
-function flash ($title = NULL, $message = NULL)
+function flash ($title = 'عملیات موفق !', $message = 'عملیات با موفقیت انجام شد')
 {
-    $flash = app('Fani\Http\Flash');
+    $flash = app('FlashMessage');
 
     if (func_num_args() == 0) {
         return $flash;
