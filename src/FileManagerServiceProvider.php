@@ -20,7 +20,7 @@ class FileManagerServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'fileManager');
         $this->registerHelpers();
 
-        $this->app->singleton('FlashMessage',function (){
+        $this->app->bind('FlashMessage',function (){
             return new FlashMessage();
         });
         $this->publishes([
